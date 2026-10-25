@@ -7,19 +7,19 @@ interface Props {
 const { name = "Chrome Extension", class: className = "" } = Astro.props;
 ---
 
-<div class={`rounded-xl border border-white/10 bg-[#111827] overflow-hidden shadow-2xl ${className}`}>
+<div class={`rounded-xl border border-[#d6d3c9] bg-[#eeece6] overflow-hidden shadow-sm ${className}`}>
   <!-- Chrome Extension Toolbar Header -->
-  <div class="flex items-center justify-between px-4 py-2 bg-[#1e293b] border-b border-white/5 select-none text-xs text-slate-300">
+  <div class="flex items-center justify-between px-4 py-2 bg-[#e4e1d8] border-b border-[#d6d3c9] select-none text-xs text-stone-700">
     <div class="flex items-center gap-2">
-      <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
-      <span class="font-medium tracking-wide">{name}</span>
-      <span class="px-1.5 py-0.5 text-[10px] rounded bg-white/10 text-cyan-300 font-mono">MV3</span>
+      <span class="w-2 h-2 rounded-full bg-[#d9481b]"></span>
+      <span class="font-bold tracking-tight text-[11px]">{name}</span>
+      <span class="px-1.5 py-0.2 rounded bg-white text-stone-600 border border-[#d6d3c9] text-[9px] font-mono">MV3</span>
     </div>
-    <div class="text-[11px] text-slate-400 font-mono">chrome-extension://</div>
+    <div class="text-[10px] text-stone-500 font-mono">EXT://LOCAL</div>
   </div>
 
   <!-- Extension Popup Container -->
-  <div class="p-4 sm:p-5 bg-[#0b0f17] text-slate-200">
+  <div class="p-4 sm:p-5 bg-[#111827] text-slate-100">
     <slot />
   </div>
 </div>

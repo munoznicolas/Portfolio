@@ -104,38 +104,42 @@ Each project repository is elevated to a commercial-grade product name and refin
 
 ---
 
-## 4. Visual Design System: Standardized Neutral Container with Framed Embeds
+## 4. Visual Design System: Industrial Functionalism & Minimalist Warm Gallery (Braun / Dieter Rams)
 
-Per the selected design direction, the global container maintains an ultra-clean, modern dark-slate aesthetic, allowing each project's individual visual identity to shine through framed mockups and high-fidelity previews.
+The portfolio rejects the generic dark SaaS aesthetic in favor of **Industrial Functionalism** inspired by **Dieter Rams, Braun, and Teenage Engineering**. It operates as a minimalist architectural exhibition where software products are presented with technical clarity, tactile physical framing, and generous negative space.
 
 ### 4.1 Global Design Tokens
-- **Backgrounds:**
-  - Base: `#0B0F17` (Deep Obsidian Void)
-  - Surface Card: `#111827` (Slate Card Surface)
-  - Elevated Card: `#1F2937` (Bordered interactive element)
+- **Backgrounds & Canvases:**
+  - Base Canvas: `#F7F6F2` (Warm matte bone/stone paper)
+  - Matte Surface Card: `#EEECE6` (Tactile warm stone module)
+  - Elevated / Interactive Surface: `#E4E1D8`
+  - Inset White Display: `#FFFFFF` (Crisp contrast card)
 - **Borders & Dividers:**
-  - Standard: `rgba(255, 255, 255, 0.08)`
-  - Active/Hover: `rgba(99, 102, 241, 0.4)` (Subtle Indigo Glow)
+  - Hairline Rule: `#D6D3C9` (Subtle mechanical boundary)
+  - Strong Border: `#A8A29E` (Defined technical chassis)
 - **Typography:**
-  - Primary Sans: `Inter` / `system-ui` (clean readability for technical prose)
-  - Monospace: `JetBrains Mono` / `Fira Code` (for AST code snippets, schemas, terminal commands)
-- **Accents:**
-  - Primary Electric Indigo: `#6366F1`
-  - Success Cyan: `#06B6D4`
-  - Warning Amber: `#F59E0B`
+  - Headings & Architecture: Geometric/Grotesk sans with crisp tracking (`#18181B` deep charcoal)
+  - Body Prose: Warm slate (`#57534E`)
+  - Metadata & Specs: Technical Monospace (`#78716C`, JetBrains Mono / SFMono)
+- **Utilitarian Signal Accents:**
+  - Braun International Orange: `#D9481B` (Key interactive anchors & status indicators)
+  - Industrial Cobalt: `#1D4ED8` (Technical references & architecture tags)
+  - Mechanical Olive: `#3F6212` (System validation states)
 
 ### 4.2 Standardized Framed Device Containers
-To celebrate each project's unique aesthetic without disrupting visual consistency:
-1. **Desktop / Window Frame (`<DesktopFrame />`):**
-   - Title bar with 3 macOS/Windows window dots, subtle title text, and clean dark border. Used for **BellView Intercom** and **Cartas Políticas** web views.
-2. **Browser Viewport Frame (`<BrowserFrame />`):**
-   - Minimalist URL bar with lock icon and tab preview. Used for **CurriculaHub** and **OmniLens**.
-3. **Extension Popup Frame (`<ExtensionFrame />`):**
-   - Exact Chrome browser extension popup dimensions with toolbar drop shadow. Used for **SmartPantry**.
-4. **Simulator / Telemetry Canvas Frame (`<SimFrame />`):**
-   - Carbon-fiber / dark-grid telemetry viewport with GT-style sector indicators. Used for **ApexLicense**.
-5. **Terminal / CLI Console Frame (`<TerminalFrame />`):**
-   - Monospace shell prompt with colored syntax blocks. Used for **ts2mermaid**.
+Rather than generic glowing containers, all 5 project frames are treated as tactile hardware modules with warm matte bezels:
+1. **Desktop Frame (`<DesktopFrame />`):** Warm stone matte exterior bezel (`#EEECE6`) with tactile inset controls, housing high-contrast native viewports inside.
+2. **Browser Viewport Frame (`<BrowserFrame />`):** Warm matte chassis with clean tactile URL pill (`#FFFFFF`) and SSL indicator.
+3. **Extension Frame (`<ExtensionFrame />`):** Chrome extension chassis with stamped MV3 metadata and native extension interface inside.
+4. **Simulator Telemetry Frame (`<SimFrame />`):** Industrial matte frame with sector telemetry indicators and dark cockpit viewport.
+5. **Terminal Frame (`<TerminalFrame />`):** Matte stone exterior with high-contrast shell prompt inside.
+
+### 4.3 Technical Ink on Warm Paper (Mermaid Diagrams)
+Architecture diagrams are styled as architectural blueprints printed on warm paper:
+- Background: `#FCFBF9` warm paper inset
+- Nodes: Pure `#FFFFFF` cards with `#292524` charcoal borders
+- Paths: `#44403C` crisp technical ink strokes
+- Data Labels: `#57534E` with `#F7F6F2` label chips
 
 ---
 
