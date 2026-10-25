@@ -1,0 +1,32 @@
+---
+interface Props {
+  url?: string;
+  class?: string;
+}
+
+const { url = "https://app.local", class: className = "" } = Astro.props;
+---
+
+<div class={`rounded-xl border border-white/10 bg-[#111827] overflow-hidden shadow-2xl ${className}`}>
+  <!-- Browser Chrome Header -->
+  <div class="flex items-center gap-3 px-4 py-2.5 bg-[#0f172a] border-b border-white/5 select-none">
+    <div class="flex items-center gap-1.5">
+      <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+      <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+      <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+    </div>
+    
+    <!-- URL Bar -->
+    <div class="flex-1 max-w-lg mx-auto flex items-center gap-2 px-3 py-1 bg-[#1e293b]/70 border border-white/5 rounded-md text-xs text-slate-400">
+      <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+      <span class="truncate">{url}</span>
+    </div>
+  </div>
+
+  <!-- Browser Viewport Body -->
+  <div class="p-4 sm:p-6 bg-[#0b0f17]/90 text-slate-200">
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  title?: string;
+  class?: string;
+}
+
+const { title = "CSP Lua Telemetry Runtime", class: className = "" } = Astro.props;
+---
+
+<div class={`rounded-xl border border-red-500/20 bg-[#0f1117] overflow-hidden shadow-2xl relative ${className}`}>
+  <!-- Telemetry HUD Header -->
+  <div class="flex items-center justify-between px-4 py-2 bg-gradient-to-r from-red-950/40 via-[#181824] to-[#12131c] border-b border-red-500/20 select-none">
+    <div class="flex items-center gap-2">
+      <div class="w-2 h-2 rounded-full bg-red-500 animate-ping"></div>
+      <span class="text-xs font-mono font-bold tracking-widest text-red-400 uppercase">{title}</span>
+    </div>
+    <div class="flex items-center gap-3 text-[11px] font-mono text-slate-400">
+      <span>SECTOR: 1</span>
+      <span class="text-emerald-400">FPS: 90</span>
+      <span class="text-amber-400">CSP v0.2.3</span>
+    </div>
+  </div>
+
+  <!-- Racing Cockpit / HUD Body -->
+  <div class="p-4 sm:p-6 bg-radial from-[#1e131d]/20 to-[#0b0c10] text-slate-200">
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,97 @@
+---
+title: "CurriculaHub"
+repoName: "OrganizadorCursada"
+tagline: "Privacy-Preserving Academic Degree & Conflict-Free Schedule Planner"
+pillar: "ai-multiplatform"
+category: "Modern Web & Cryptographic Privacy"
+featured: true
+order: 5
+techStack: ["Angular 21", "TypeScript 5.9", "Angular Material 21", "Signals Architecture", "Oblivious HTTP (OHTTP)", "k-Anonymity Sanitizer", "Vitest"]
+metrics:
+  - label: "Framework"
+    value: "Angular 21 Signals"
+  - label: "Privacy Protocol"
+    value: "Oblivious HTTP (OHTTP)"
+  - label: "Schedule Conflicts"
+    value: "Zero-Collision DAG"
+  - label: "Calendar Sync"
+    value: "Automated .ics Export"
+coverImage: "/images/curricula-preview.png"
+aestheticType: "browser"
+aiMultiplierStory: "Navigating the latest Angular 21 Signals architecture alongside advanced cryptographic privacy protocols (Oblivious HTTP relays and k-anonymity metadata sanitizers) required bridging academic privacy papers with reactive frontend engineering. AI agent assistance accelerated the design of DAG graph algorithms for prerequisite safety and automated unit testing in Vitest."
+---
+
+import BrowserFrame from '../../components/frames/BrowserFrame.astro';
+
+<BrowserFrame url="https://curriculahub.internal.dev/schedule" class="my-8">
+  <div class="space-y-4">
+    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+        <span class="text-xs font-mono uppercase text-cyan-400">Career Plan: Ingeniería en Sistemas (Semester 4)</span>
+      </div>
+      <div class="text-xs font-mono text-emerald-400">DAG Status: Validated (No Missing Prerequisites)</div>
+    </div>
+
+    {/* Prerequisite Graph Node Grid */}
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+      <div class="p-3 rounded bg-slate-900 border border-emerald-500/30">
+        <div class="text-[10px] font-mono text-emerald-400 uppercase">Aprobada (Req Passed)</div>
+        <div class="font-bold text-white mt-1">Algoritmos & Estructuras de Datos</div>
+        <div class="text-[11px] text-slate-400 mt-1">Final Exam: Passed (Score 9/10)</div>
+      </div>
+      <div class="p-3 rounded bg-slate-900 border border-cyan-500/30">
+        <div class="text-[10px] font-mono text-cyan-400 uppercase">Cursando (In Progress)</div>
+        <div class="font-bold text-white mt-1">Sistemas Operativos</div>
+        <div class="text-[11px] text-slate-400 mt-1">Comisión 02 — Mar & Jue 18:30</div>
+      </div>
+      <div class="p-3 rounded bg-slate-900 border border-white/10 opacity-75">
+        <div class="text-[10px] font-mono text-amber-400 uppercase">Pendiente (Requires SO)</div>
+        <div class="font-bold text-white mt-1">Redes de Información</div>
+        <div class="text-[11px] text-slate-400 mt-1">Locked until SO is finished</div>
+      </div>
+    </div>
+  </div>
+</BrowserFrame>
+
+## Project Overview
+
+**CurriculaHub** is a modern, privacy-first web application built with **Angular 21** designed to help university students plan, manage, and visualize their academic degree trajectory. It features interactive course dependency trees, automated schedule collision detection, and a community study plan workshop.
+
+---
+
+## Technical Architecture & Privacy Engineering
+
+```mermaid
+graph TD
+    subgraph Client["Angular 21 Client Application"]
+        Signals["Signal-Based State Store\n(Courses, Plans, Schedules)"]
+        DAG["Prerequisite DAG Engine\n(Topological sort & safety checks)"]
+        Sanitizer["k-Anonymity Sanitizer\n(Pre-flight metadata stripper)"]
+        OHTTPClient["Oblivious HTTP Client\n(HPKE encryption)"]
+    end
+
+    subgraph PrivacyRelay["Decoupled Privacy Relays"]
+        Relay["OHTTP Relay Server\n(Strips client IP & headers)"]
+        Gateway["Target Gateway\n(Decrypts payload, blind to IP)"]
+        DB[(Cloud Study Plan Workshop)]
+    end
+
+    Signals --> DAG
+    Signals --> Sanitizer
+    Sanitizer --> OHTTPClient
+    OHTTPClient -->|Encrypted Request| Relay
+    Relay -->|Stripped Request| Gateway
+    Gateway --> DB
+```
+
+---
+
+## Engineering Highlights
+
+1. **Reactive Prerequisite DAG Engine:**  
+   Models study plan prerequisites as a Directed Acyclic Graph using Angular Signals (`signal`, `computed`, `effect`). When a student toggles a course status (e.g., from *Cursando* to *Aprobada*), dependent downstream subjects immediately update their unlock availability with zero recalculation lag.
+2. **Oblivious HTTP (OHTTP) & $k$-Anonymity:**  
+   Community workshop sharing decouples base curricula from elective selections to prevent cohort intersection fingerprinting. Plan submissions undergo automated client-side sanitization and are transmitted through OHTTP relays, making it cryptographically impossible for server operators to correlate degree progress with personal IP addresses.
+3. **Automated Timetable Conflict Resolution:**  
+   Calculates class commission overlaps in real time and offers one-click `.ics` export for synchronizing student timetables with Google Calendar and Apple Calendar.

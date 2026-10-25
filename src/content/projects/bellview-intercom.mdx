@@ -1,0 +1,103 @@
+---
+title: "BellView Intercom"
+repoName: "VOIPBell-Windows"
+tagline: "Windows 11 Native Fluent Intercom & Video Door Access Control Client"
+pillar: "ai-multiplatform"
+category: "Desktop .NET & Real-Time Multimedia"
+featured: true
+order: 4
+techStack: ["C# .NET 10", "WPF", "Windows 11 Fluent / Mica", "Windows DPAPI", "SIP / VoIP", "Windows Media Foundation", "JSON-RPC"]
+metrics:
+  - label: "Runtime Target"
+    value: "Windows 11 Fluent (.NET 10)"
+  - label: "Security Encryption"
+    value: "Windows DPAPI Machine Keys"
+  - label: "Video Preview"
+    value: "Zero-Answer Early Media"
+  - label: "Access Control"
+    value: "JSON-RPC 2.0 + DTMF Strikes"
+coverImage: "/images/bellview-preview.png"
+aestheticType: "desktop"
+aiMultiplierStory: "Building high-performance native Windows applications requires interacting with legacy COM interop, low-level media pipelines (Windows Media Foundation), and Windows DPAPI hardware-backed encryption. Directing AI agent workflows unlocked rapid implementation of Windows 11 Mica backdrop integration, SIP early-media RTP stream demuxing, and dual-relay hardware control without third-party cloud dependencies."
+---
+
+import DesktopFrame from '../../components/frames/DesktopFrame.astro';
+
+<DesktopFrame title="BellView Intercom — Front Door Station (Incoming Ring)" class="my-8">
+  <div class="space-y-4">
+    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-mono uppercase text-emerald-400">Visitor Alert: Front Entrance Station</span>
+      </div>
+      <div class="text-xs font-mono text-slate-400">SIP: 101@192.168.1.120</div>
+    </div>
+
+    {/* Video Feed Simulation */}
+    <div class="relative bg-slate-950 rounded-lg p-6 border border-white/10 flex flex-col items-center justify-center min-h-[200px]">
+      <div class="text-xs font-mono text-cyan-400 mb-2">[Early-Media H.264 Stream 720p @ 30FPS]</div>
+      <div class="text-sm font-semibold text-slate-200">Visitor detected at main gate</div>
+      <div class="text-xs text-slate-500 mt-1">Recording locally to MP4 via Windows Media Foundation</div>
+    </div>
+
+    {/* Door Strike Actions */}
+    <div class="flex items-center justify-between pt-2">
+      <div class="flex items-center gap-2">
+        <button class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded text-xs font-bold text-white transition-colors">
+          Answer & Talk
+        </button>
+        <button class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded text-xs font-medium text-slate-300 transition-colors">
+          Dismiss
+        </button>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-xs font-bold text-white transition-colors">
+          Trigger Door 1 (JSON-RPC)
+        </button>
+        <button class="px-3 py-2 bg-indigo-900/60 hover:bg-indigo-800 border border-indigo-500/30 rounded text-xs font-medium text-indigo-300 transition-colors">
+          Door 2 (DTMF 32)
+        </button>
+      </div>
+    </div>
+  </div>
+</DesktopFrame>
+
+## Project Overview
+
+**BellView Intercom** is a native Windows 11 desktop client designed for IP door intercoms and video access control systems. Rather than forcing building occupants to rely exclusively on mobile push notifications and smartphones, BellView Intercom runs in the Windows system tray, starts on boot, delivers real-time H.264 early-media video notifications, and triggers electronic door strikes with a single click.
+
+---
+
+## Technical Architecture & Security Model
+
+```mermaid
+graph TD
+    subgraph Hardware["Door Access Hardware"]
+        Door["Commsmundi / SIP Door Station\n(Camera + Intercom + Relays)"]
+    end
+
+    subgraph Client["BellView Desktop Client (.NET 10 / WPF)"]
+        Tray["System Tray Lifecycle\n(Auto-start on Windows login)"]
+        SIP["SIP & RTP Stack\n(Early-media video demuxing)"]
+        WMF["Windows Media Foundation\n(Zero-cloud local MP4 recording)"]
+        DPAPI["Windows DPAPI Security\n(Hardware-bound credential encryption)"]
+        Relay["Relay Controller\n(JSON-RPC 2.0 WebService + DTMF 31/32)"]
+    end
+
+    Door <-->|SIP Signaling & H.264 RTP| SIP
+    SIP --> WMF
+    Tray --> DPAPI
+    Tray --> Relay
+    Relay -->|Trigger Strike| Door
+```
+
+---
+
+## Engineering Highlights & The AI Advantage
+
+1. **Native Windows 11 Fluent UI & Backdrop Materials:**  
+   Implemented using WPF (.NET 10) with custom Windows DwmApi interop to invoke native Windows 11 Mica and Acrylic transparency surfaces without sacrificing framerates.
+2. **Encrypted Local Storage via DPAPI:**  
+   Eliminated cloud credential leakage by storing SIP passwords and WebService credentials encrypted on disk using `System.Security.Cryptography.ProtectedData` (Windows Data Protection API).
+3. **Hardware Door Relay Control:**  
+   Supports dual unlock mechanisms: asynchronous JSON-RPC 2.0 over HTTP with Basic Authentication, and in-band DTMF audio tones (`31` / `32`) during active conversations.

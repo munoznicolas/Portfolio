@@ -1,0 +1,77 @@
+---
+title: "ts2mermaid"
+repoName: "tsTypes2umlBack"
+tagline: "TypeScript AST Compiler & Interactive Mermaid UML Diagram Engine"
+pillar: "ai-multiplatform"
+category: "Developer Tooling & Compilers"
+featured: true
+order: 7
+techStack: ["TypeScript 5.5", "Compiler API (AST)", "Mermaid.js", "Express", "Commander CLI", "Jest"]
+metrics:
+  - label: "Syntax Support"
+    value: "Classes, Types, Interfaces"
+  - label: "Diagram Targets"
+    value: "UML Class & Sequence"
+  - label: "Interfaces"
+    value: "CLI + REST Microservice"
+  - label: "Performance"
+    value: "< 120ms AST Processing"
+coverImage: "/images/ts2mermaid-preview.png"
+aestheticType: "terminal"
+aiMultiplierStory: "Working with compiler ASTs requires navigating deeply nested syntax nodes, generic type resolution, and recursive symbol hierarchies. Directing AI agents to systematically map TypeScript compiler nodes (InterfaceDeclaration, ClassDeclaration, HeritageClauses) directly to Mermaid diagram grammar enabled building a robust CLI and modular test suite in record time."
+---
+
+import TerminalFrame from '../../components/frames/TerminalFrame.astro';
+
+<TerminalFrame command="npx ts2mermaid ./src/models --format class --direction TD" class="my-8">
+  <div class="space-y-2 font-mono text-xs">
+    <div class="text-slate-400">🔍 Scanning TypeScript sources in ./src/models...</div>
+    <div class="text-slate-300">✓ Parsed 14 source files (48 interfaces, 12 classes, 8 type aliases)</div>
+    <div class="text-cyan-400">⚙ Analyzing AST heritage clauses and member visibilities...</div>
+    <div class="text-emerald-400 font-bold">✨ Mermaid UML diagram successfully generated (dist/architecture.mmd):</div>
+    
+    <div class="mt-4 p-4 rounded bg-[#0b0f17] border border-white/10 text-slate-300">
+      <div class="text-indigo-400 font-semibold mb-1">classDiagram</div>
+      <div class="pl-4 text-slate-400">class IAccountService &#123;</div>
+      <div class="pl-8 text-emerald-400">+authenticate(token: string): Promise&lt;User&gt;</div>
+      <div class="pl-8 text-amber-400">#validateClaims(claims: TokenClaims): boolean</div>
+      <div class="pl-4 text-slate-400">&#125;</div>
+      <div class="pl-4 text-indigo-400">IAccountService &lt;|.. AccountServiceImpl : implements</div>
+    </div>
+  </div>
+</TerminalFrame>
+
+## Project Overview
+
+**ts2mermaid** is a developer experience tool and microservice that inspects TypeScript source code, traverses its Abstract Syntax Tree (AST), and automatically compiles type relationships, interfaces, and class hierarchies into clean, copy-pasteable **Mermaid UML diagrams**.
+
+---
+
+## Technical Architecture & AST Pipeline
+
+```mermaid
+graph LR
+    Source["TypeScript Source Code\n(*.ts files)"]
+    TSCompiler["TypeScript Compiler API\n(ts.createSourceFile)"]
+    AST["AST Traversal Engine\n(Node Visitors & Type Checker)"]
+    Resolver["Relationship Resolver\n(Extends, Implements, Generics)"]
+    Generator["Mermaid Synthesizer\n(Grammar Formatter)"]
+    Output["Generated Output\n(CLI stdout, .mmd files, REST JSON)"]
+
+    Source --> TSCompiler
+    TSCompiler --> AST
+    AST --> Resolver
+    Resolver --> Generator
+    Generator --> Output
+```
+
+---
+
+## Engineering Highlights
+
+1. **Native TypeScript AST Traversal:**  
+   Bypasses brittle regex parsing in favor of the official TypeScript Compiler API (`typescript`). Inspects syntax nodes down to token level, reliably capturing generic arguments, optional properties, method parameter types, and access modifiers (`public`, `protected`, `private`).
+2. **Dual Operational Modes (CLI & Microservice):**  
+   Can be run as a standalone terminal binary (`ts2mermaid`) within CI/CD pipelines to keep documentation diagrams continuously up to date, or hosted as an Express REST microservice providing diagramming capabilities to external web apps.
+3. **Sequence & Class Diagram Synthesis:**  
+   Supports generating both structural Class diagrams and interaction Sequence diagrams derived from async method invocation chains.

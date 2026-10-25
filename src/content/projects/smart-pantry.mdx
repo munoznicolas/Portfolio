@@ -1,0 +1,111 @@
+---
+title: "SmartPantry"
+repoName: "carrefour-reposicion-extension"
+tagline: "Privacy-First Chrome Extension & Grocery Replenishment Predictor"
+pillar: "ai-multiplatform"
+category: "Browser Extensions & Local Heuristics"
+featured: true
+order: 6
+techStack: ["Chrome Extension (Manifest V3)", "Service Workers", "JavaScript", "chrome.storage.local", "Web APIs / OMS"]
+metrics:
+  - label: "Privacy Architecture"
+    value: "100% Client-Side"
+  - label: "External Servers"
+    value: "Zero (No Tracking)"
+  - label: "Heuristic Sync"
+    value: "Incremental OMS"
+  - label: "Export Capabilities"
+    value: "Tabular CSV"
+coverImage: "/images/smartpantry-preview.png"
+aestheticType: "extension"
+aiMultiplierStory: "Developing against modern e-commerce platforms without public APIs requires careful reverse-engineering of authenticated network exchanges and session state management. Directing AI agent workflows allowed quick inspection of Carrefour's Order Management System (OMS) JSON structures, building an incremental caching sync mechanism, and engineering a replenishment prediction formula in hours."
+---
+
+import ExtensionFrame from '../../components/frames/ExtensionFrame.astro';
+
+<ExtensionFrame name="SmartPantry — Carrefour Reposición" class="my-8 max-w-md mx-auto">
+  <div class="space-y-3 font-sans text-xs">
+    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+      <span class="text-slate-400">Sesión Carrefour Argentina:</span>
+      <span class="text-emerald-400 font-mono font-bold">Activa (Cookie Auth)</span>
+    </div>
+
+    {/* Restock Recommendations List */}
+    <div class="space-y-2">
+      <div class="p-2.5 rounded bg-red-950/40 border border-red-500/30 flex items-center justify-between">
+        <div>
+          <div class="font-bold text-white">Leche Entera Larga Vida 1L</div>
+          <div class="text-[10px] text-red-300">Intervalo habitual: 7 días • Última compra: hace 12 días</div>
+        </div>
+        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-300">Atrasado (>130%)</span>
+      </div>
+
+      <div class="p-2.5 rounded bg-amber-950/40 border border-amber-500/30 flex items-center justify-between">
+        <div>
+          <div class="font-bold text-white">Detergente Lavavajilla 500ml</div>
+          <div class="text-[10px] text-amber-300">Intervalo habitual: 28 días • Última compra: hace 25 días</div>
+        </div>
+        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">Te toca pronto</span>
+      </div>
+
+      <div class="p-2.5 rounded bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between">
+        <div>
+          <div class="font-bold text-white">Café Tostado Molido 250g</div>
+          <div class="text-[10px] text-emerald-300">Intervalo habitual: 21 días • Última compra: hace 5 días</div>
+        </div>
+        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">Al día (&lt;80%)</span>
+      </div>
+    </div>
+
+    <div class="pt-2 flex items-center justify-between">
+      <button class="px-3 py-1.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-[11px] transition-colors">
+        Actualizar Historial
+      </button>
+      <button class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-[11px] transition-colors">
+        Exportar CSV
+      </button>
+    </div>
+  </div>
+</ExtensionFrame>
+
+## Project Overview
+
+**SmartPantry** is a Google Chrome extension (built natively on Manifest V3) designed to analyze household grocery purchase history from **Carrefour Argentina** (`carrefour.com.ar`) and predict when staple household items will run out based on past consumption cadence.
+
+---
+
+## Technical Architecture & Privacy Guarantees
+
+```mermaid
+graph TD
+    User["User in Chrome Browser"]
+    Session["Active carrefour.com.ar Tab\n(Auth Cookies / Session Tokens)"]
+
+    subgraph Extension["SmartPantry Extension (Manifest V3)"]
+        SW["Service Worker (background.js)\nDefensive rate-limiting fetch"]
+        Store["chrome.storage.local\n(Encrypted on-device cache)"]
+        Heuristics["Replenishment Heuristic Engine\n(Inter-purchase interval formula)"]
+        Popup["Interactive Popup UI (popup.js)\nFilters & CSV Export"]
+    end
+
+    User -->|Open Popup| Popup
+    Popup -->|Trigger Sync| SW
+    SW -->|Fetch Orders API| Session
+    SW --> Store
+    Store --> Heuristics
+    Heuristics --> Popup
+```
+
+---
+
+## Engineering Highlights
+
+1. **Zero External Storage Architecture:**  
+   Unlike commercial price trackers that scrape and upload user receipt data to centralized marketing databases, SmartPantry executes 100% within the user's browser sandbox. Data never leaves `chrome.storage.local`.
+2. **Incremental Session Synchronization:**  
+   Fetches high-level order metadata and selectively queries detailed line items only for newly added, uncached orders. Defensive request spacing and exponential backoff prevent rate-limiting or session invalidation on the retailer's servers.
+3. **Adaptive Replenishment Classification:**  
+   Calculates median elapsed days between purchases for every product SKU:
+   - **Atrasado, reponer:** Current interval exceeds **130%** of historical average.
+   - **Te toca pronto:** Current interval falls between **80% and 130%**.
+   - **Al día:** Current interval is below **80%**.
