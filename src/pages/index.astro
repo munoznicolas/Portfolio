@@ -123,10 +123,19 @@ const crossPlatformProjects = allProjects
                 {project.data.tagline}
               </p>
 
+              <!-- Tech Stack Badges (Before Bulletpoints) -->
+              <div class="flex flex-wrap gap-1 mb-5">
+                {project.data.techStack.map((tech) => (
+                  <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-[#eeece6] text-stone-700 border border-[#d6d3c9]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
               <!-- AI Synergies -->
               {project.data.aiSynergies && project.data.aiSynergies.length > 0 ? (
-                <div class="mb-5 space-y-1.5">
-                  <div class="text-[10px] font-mono uppercase tracking-wider text-[#d9481b] font-bold">AI Synergies:</div>
+                <div class="mb-6 space-y-1.5">
+                  <div class="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold">AI Synergies:</div>
                   <ul class="text-[11px] text-stone-700 space-y-1.5 pl-4 list-disc marker:text-[#d9481b] leading-snug">
                     {project.data.aiSynergies.slice(0, 4).map((item) => (
                       <li>{item}</li>
@@ -134,25 +143,11 @@ const crossPlatformProjects = allProjects
                   </ul>
                 </div>
               ) : project.data.aiMultiplierStory ? (
-                <div class="mb-5 text-[11px] text-stone-700 leading-relaxed">
-                  <div class="text-[10px] font-mono uppercase tracking-wider text-[#d9481b] font-bold mb-1">AI Synergies:</div>
+                <div class="mb-6 text-[11px] text-stone-700 leading-relaxed">
+                  <div class="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold mb-1">AI Synergies:</div>
                   <p>{project.data.aiMultiplierStory}</p>
                 </div>
               ) : null}
-
-              <!-- Tech Stack Badges -->
-              <div class="flex flex-wrap gap-1 mb-6">
-                {project.data.techStack.slice(0, 4).map((tech) => (
-                  <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-[#eeece6] text-stone-600 border border-[#d6d3c9]">
-                    {tech}
-                  </span>
-                ))}
-                {project.data.techStack.length > 4 && (
-                  <span class="px-1.5 py-0.5 text-[10px] font-mono text-stone-400">
-                    +{project.data.techStack.length - 4}
-                  </span>
-                )}
-              </div>
             </div>
 
             <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
