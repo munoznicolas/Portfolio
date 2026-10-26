@@ -97,20 +97,5 @@ const {
     <main class="flex-1">
       <slot />
     </main>
-
-    <!-- Architectural Footer -->
-    <footer class="border-t border-[#d6d3c9] bg-[#eeece6] py-14 text-stone-600 text-xs">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <p class="font-bold text-stone-900 tracking-tight text-sm">{siteConfig.authorName} — {siteConfig.roleTitle}</p>
-          <p class="text-stone-500 mt-1">Industrial Functionalism & System Architecture. Built with Astro & Tailwind CSS.</p>
-        </div>
-        <div class="flex items-center gap-6 font-mono uppercase text-[11px]">
-          <a href={siteConfig.githubUrl} target="_blank" class="hover:text-stone-950 transition-colors">GitHub</a>
-          <a href={siteConfig.linkedinUrl} target="_blank" class="hover:text-stone-950 transition-colors">LinkedIn</a>
-          <a href={`mailto:${siteConfig.email}`} class="hover:text-stone-950 transition-colors">Email</a>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>
