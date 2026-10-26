@@ -19,15 +19,14 @@ metrics:
 coverImage: "/images/cartas-preview.png"
 aestheticType: "desktop"
 architectureFocus:
-  - "Backend-for-Frontend (BFF) decoupling domain logic from UI presentation"
-  - "Deterministic turn loops and server-authoritative state adjudication"
-  - "TSyringe IoC container for dependency injection and automated in-memory testing"
+  - "Decoupled Backend-for-Frontend (BFF) architecture with TSyringe IoC container"
+  - "Deterministic turn loops and server-authoritative state sync over Socket.io"
+  - "Automated in-memory integration testing using mongodb-memory-server"
+  - "MongoDB Atlas cloud persistence and reactive NgRx state machine"
 structuredStack:
   frontend: "Angular 18 (NgRx)"
   backend: "Node.js / Express (TSyringe)"
   db: "MongoDB (Mongoose)"
-  infrastructure: ["Backend-for-Frontend (BFF)", "Socket.io WebSockets", "IoC Container"]
-  cloud: ["MongoDB Atlas", "Cloud Sync"]
 ---
 
 import DesktopFrame from '../../components/frames/DesktopFrame.astro';

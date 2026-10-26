@@ -50,65 +50,34 @@ const crossPlatformProjects = allProjects
               <h3 class="text-2xl font-bold text-stone-900 group-hover:text-[#d9481b] transition-colors mb-3">
                 {project.data.title}
               </h3>
-              <p class="text-stone-600 text-sm leading-relaxed mb-6">
+              <p class="text-stone-600 text-sm leading-relaxed mb-5">
                 {project.data.tagline}
               </p>
 
+              <!-- Tech Stack (Frontend, Backend, DB) -->
+              {project.data.structuredStack && (
+                <div class="flex flex-wrap items-center gap-1.5 mb-5 text-xs font-mono">
+                  <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
+                    <strong class="font-semibold text-stone-500">FE:</strong> {project.data.structuredStack.frontend}
+                  </span>
+                  <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
+                    <strong class="font-semibold text-stone-500">BE:</strong> {project.data.structuredStack.backend}
+                  </span>
+                  <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
+                    <strong class="font-semibold text-stone-500">DB:</strong> {project.data.structuredStack.db}
+                  </span>
+                </div>
+              )}
+
               <!-- Architecture Highlights Checklist -->
               {project.data.architectureFocus && (
-                <div class="mb-6 space-y-2">
+                <div class="mb-6 space-y-1.5">
                   <div class="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold">Key Architectural Decisions:</div>
                   <ul class="text-xs text-stone-700 space-y-1.5 pl-4 list-disc marker:text-[#d9481b]">
                     {project.data.architectureFocus.map((item) => (
                       <li>{item}</li>
                     ))}
                   </ul>
-                </div>
-              )}
-
-              <!-- Structured Tech Stack Rows -->
-              {project.data.structuredStack ? (
-                <div class="space-y-2 mb-8 text-xs font-mono">
-                  <!-- Row 1: Frontend, Backend, DB -->
-                  <div class="flex flex-wrap items-center gap-1.5">
-                    <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
-                      <strong class="font-semibold text-stone-500">FE:</strong> {project.data.structuredStack.frontend}
-                    </span>
-                    <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
-                      <strong class="font-semibold text-stone-500">BE:</strong> {project.data.structuredStack.backend}
-                    </span>
-                    <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
-                      <strong class="font-semibold text-stone-500">DB:</strong> {project.data.structuredStack.db}
-                    </span>
-                  </div>
-
-                  <!-- Row 2: Infrastructure Concept / App -->
-                  <div class="flex flex-wrap items-center gap-1.5">
-                    <span class="text-[10px] text-stone-400 font-bold uppercase tracking-wider mr-1">Infra:</span>
-                    {project.data.structuredStack.infrastructure.map((infra) => (
-                      <span class="px-2 py-0.5 rounded bg-white text-stone-700 border border-[#d6d3c9] text-[11px]">
-                        {infra}
-                      </span>
-                    ))}
-                  </div>
-
-                  <!-- Row 3: Cloud Service -->
-                  <div class="flex flex-wrap items-center gap-1.5">
-                    <span class="text-[10px] text-stone-400 font-bold uppercase tracking-wider mr-1">Cloud:</span>
-                    {project.data.structuredStack.cloud.map((srv) => (
-                      <span class="px-2 py-0.5 rounded bg-white text-stone-700 border border-[#d6d3c9] text-[11px]">
-                        {srv}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div class="flex flex-wrap gap-1.5 mb-8">
-                  {project.data.techStack.map((tech) => (
-                    <span class="px-2 py-0.5 text-[11px] font-mono rounded bg-[#eeece6] text-stone-700 border border-[#d6d3c9]">
-                      {tech}
-                    </span>
-                  ))}
                 </div>
               )}
             </div>

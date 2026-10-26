@@ -19,15 +19,14 @@ metrics:
 coverImage: "/images/omnilens-preview.png"
 aestheticType: "browser"
 architectureFocus:
-  - "Zero-GC Float32Array tensor buffer pooling in Web Workers"
-  - "Decoupled WebRTC camera pipeline with requestAnimationFrame loop guarding"
-  - "Spatial radius queries with PostGIS ST_DWithin and NetTopologySuite"
+  - "Zero-GC Float32Array tensor buffer pooling in background Web Workers"
+  - "PostGIS spatial radius indexing (SRID 4326) with NetTopologySuite"
+  - "Docker Compose containerized local development & microservices"
+  - "AWS cloud deployment with Infrastructure as Code (Terraform)"
 structuredStack:
   frontend: "Angular 22 (ONNX WASM)"
   backend: "ASP.NET Core (.NET 10)"
   db: "PostgreSQL + PostGIS"
-  infrastructure: ["Docker Compose", "Zero-GC Buffer Pooling", "Web Workers"]
-  cloud: ["AWS (Terraform IaC)"]
 ---
 
 import BrowserFrame from '../../components/frames/BrowserFrame.astro';

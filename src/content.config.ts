@@ -21,8 +21,6 @@ const projects = defineCollection({
       frontend: z.string(),
       backend: z.string(),
       db: z.string(),
-      infrastructure: z.array(z.string()),
-      cloud: z.array(z.string()),
     }).optional(),
     aiMultiplierStory: z.string().optional(),
     aiSynergies: z.array(z.string()).optional(),
