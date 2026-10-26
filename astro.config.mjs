@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://username.github.io',
+  site: 'https://munoznicolas.github.io',
   base: '/',
   integrations: [mdx()],
   vite: {
