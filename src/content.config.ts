@@ -18,6 +18,7 @@ const projects = defineCollection({
     })).optional(),
     architectureFocus: z.array(z.string()).optional(),
     aiMultiplierStory: z.string().optional(),
+    aiSynergies: z.array(z.string()).optional(),
     githubUrl: z.string().optional(),
     demoUrl: z.string().optional(),
     coverImage: z.string().optional(),
