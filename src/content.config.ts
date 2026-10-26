@@ -17,6 +17,13 @@ const projects = defineCollection({
       value: z.string(),
     })).optional(),
     architectureFocus: z.array(z.string()).optional(),
+    structuredStack: z.object({
+      frontend: z.string(),
+      backend: z.string(),
+      db: z.string(),
+      infrastructure: z.array(z.string()),
+      cloud: z.array(z.string()),
+    }).optional(),
     aiMultiplierStory: z.string().optional(),
     aiSynergies: z.array(z.string()).optional(),
     githubUrl: z.string().optional(),

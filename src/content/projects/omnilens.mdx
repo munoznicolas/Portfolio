@@ -22,6 +22,12 @@ architectureFocus:
   - "Zero-GC Float32Array tensor buffer pooling in Web Workers"
   - "Decoupled WebRTC camera pipeline with requestAnimationFrame loop guarding"
   - "Spatial radius queries with PostGIS ST_DWithin and NetTopologySuite"
+structuredStack:
+  frontend: "Angular 22 (ONNX WASM)"
+  backend: "ASP.NET Core (.NET 10)"
+  db: "PostgreSQL + PostGIS"
+  infrastructure: ["Docker Compose", "Zero-GC Buffer Pooling", "Web Workers"]
+  cloud: ["AWS (Terraform IaC)"]
 ---
 
 import BrowserFrame from '../../components/frames/BrowserFrame.astro';

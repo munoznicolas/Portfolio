@@ -22,6 +22,12 @@ architectureFocus:
   - "Backend-for-Frontend (BFF) decoupling domain logic from UI presentation"
   - "Deterministic turn loops and server-authoritative state adjudication"
   - "TSyringe IoC container for dependency injection and automated in-memory testing"
+structuredStack:
+  frontend: "Angular 18 (NgRx)"
+  backend: "Node.js / Express (TSyringe)"
+  db: "MongoDB (Mongoose)"
+  infrastructure: ["Backend-for-Frontend (BFF)", "Socket.io WebSockets", "IoC Container"]
+  cloud: ["MongoDB Atlas", "Cloud Sync"]
 ---
 
 import DesktopFrame from '../../components/frames/DesktopFrame.astro';
