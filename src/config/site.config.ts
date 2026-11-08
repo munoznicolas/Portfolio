@@ -11,9 +11,9 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   authorName: "Nicolas Muñoz",
-  roleTitle: "Senior Fullstack & Systems Architect",
-  headline: "Architecting resilient systems accelerated by autonomous AI",
-  bio: "Senior engineer focused on clean distributed architectures, browser-edge computer vision, and reactive state machines. Leveraging AI agents to rapidly execute across low-level native systems, niche game runtimes, and compiler toolchains.",
+  roleTitle: "Software Developer",
+  headline: "Building reliable systems and exploring what AI makes possible.",
+  bio: "I build backend services, distributed applications, and practical AI-powered tools. From production systems in Go and .NET to browser-based computer vision, I focus on solving engineering problems with maintainable software.",
   githubUrl: "https://github.com/munoznicolas",
   linkedinUrl: "https://www.linkedin.com/in/nicolasarielmunoz",
   email: "munoz_nicolas@hotmail.com",

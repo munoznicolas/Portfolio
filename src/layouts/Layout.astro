@@ -20,7 +20,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- MANDATORY: Declare support for both light and dark themes to prevent FOUC -->
     <meta name="color-scheme" content="light dark" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -34,7 +34,7 @@ const {
     <script is:inline type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
       mermaid.initialize({
-        startOnLoad: true,
+        startOnLoad: false,
         theme: 'neutral',
         themeVariables: {
           darkMode: false,
@@ -47,6 +47,35 @@ const {
           tertiaryColor: '#eeece6'
         }
       });
+
+      async function renderMermaidDiagrams() {
+        const blocks = document.querySelectorAll('pre[data-language="mermaid"], pre:has(> code.language-mermaid)');
+        if (!blocks.length) return;
+
+        for (const block of blocks) {
+          const rawCode = block.textContent?.trim() || '';
+          if (!rawCode) continue;
+          const container = document.createElement('div');
+          container.className = 'mermaid';
+          container.textContent = rawCode;
+          block.replaceWith(container);
+        }
+
+        try {
+          await mermaid.run({
+            querySelector: '.mermaid',
+          });
+        } catch (err) {
+          console.error('Mermaid render error:', err);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+      } else {
+        renderMermaidDiagrams();
+      }
+      document.addEventListener('astro:page-load', renderMermaidDiagrams);
     </script>
   </head>
   <body class="bg-[#f7f6f2] text-stone-900 min-h-screen flex flex-col antialiased selection:bg-[#d9481b] selection:text-white">
@@ -54,20 +83,20 @@ const {
     <header class="sticky top-0 z-50 backdrop-blur-md bg-[#f7f6f2]/90 border-b border-[#d6d3c9] transition-all">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <!-- Brand / Monogram -->
-        <a href="/" class="flex items-center gap-3 group">
+        <a href={import.meta.env.BASE_URL} class="flex items-center gap-3 group">
           <div class="w-8 h-8 rounded-md bg-[#18181b] text-white flex items-center justify-center font-mono font-bold text-xs tracking-wider shadow-sm group-hover:bg-[#d9481b] transition-colors">
             NM
           </div>
           <div>
             <span class="font-bold text-stone-900 tracking-tight block leading-tight text-sm">{siteConfig.authorName}</span>
-            <span class="text-[10px] text-stone-500 font-mono uppercase tracking-widest block">Systems Architect</span>
+            <span class="text-[10px] text-stone-500 font-mono uppercase tracking-widest block">{siteConfig.roleTitle}</span>
           </div>
         </a>
 
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-stone-600">
-          <a href="/#architecture" class="hover:text-stone-950 transition-colors">Architecture</a>
-          <a href="/#cross-platform" class="hover:text-[#d9481b] transition-colors">AI & Cross-Platform</a>
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/#architecture`} class="hover:text-stone-950 transition-colors">Featured Projects</a>
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/#cross-platform`} class="hover:text-[#d9481b] transition-colors">Technical Explorations</a>
         </nav>
 
         <!-- Actions -->

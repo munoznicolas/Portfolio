@@ -1,16 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ImageLightbox from '../components/ImageLightbox.astro';
 import { siteConfig } from '../config/site.config';
-
-const allProjects = await getCollection('projects');
-const architectureProjects = allProjects
-  .filter((p) => p.data.pillar === 'architecture')
-  .sort((a, b) => a.data.order - b.data.order);
-
-const crossPlatformProjects = allProjects
-  .filter((p) => p.data.pillar === 'ai-multiplatform')
-  .sort((a, b) => a.data.order - b.data.order);
+import { featuredProjects, crossPlatformProjects } from '../config/projects.config';
 ---
 
 <Layout>
@@ -19,149 +12,54 @@ const crossPlatformProjects = allProjects
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
         <h1 class="text-4xl sm:text-6xl font-extrabold text-stone-900 tracking-tight leading-[1.1] mb-8">
-          Architecting resilient systems accelerated by autonomous AI.
+          {siteConfig.headline}
         </h1>
 
         <p class="text-lg sm:text-xl text-stone-600 leading-relaxed max-w-2xl font-normal">
-          Senior Fullstack & Systems Architect delivering scalable distributed backends and browser-edge vision — while directing AI agents to enter niche game runtimes, native OS desktop frameworks, and compiler toolchains.
+          {siteConfig.bio}
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Pillar I: Architectural Deep Dives -->
+  <!-- Pillar I: Featured Projects -->
   <section id="architecture" class="py-20 sm:py-28 border-b border-[#d6d3c9]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <div class="max-w-2xl mb-16">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight mb-4">
-          Architectural Deep Dives
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
+          Featured Projects
         </h2>
-        <p class="text-stone-600 text-sm leading-relaxed">
-          Clean system design, scalable state machines, and distributed boundaries across browser-edge AI and real-time backend ecosystems.
-        </p>
       </div>
 
-      <!-- Architecture Showcase Cards -->
+      <!-- Featured Projects Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {architectureProjects.map((project) => (
-          <div class="rounded-xl border border-[#d6d3c9] bg-white p-7 sm:p-9 flex flex-col justify-between hover:border-stone-500 transition-all duration-200 group shadow-xs">
-            <div>
-              <h3 class="text-2xl font-bold text-stone-900 group-hover:text-[#d9481b] transition-colors mb-3">
-                {project.data.title}
-              </h3>
-              <p class="text-stone-600 text-sm leading-relaxed mb-5">
-                {project.data.tagline}
-              </p>
-
-              <!-- Tech Stack (Frontend, Backend, DB) -->
-              {project.data.structuredStack && (
-                <div class="flex flex-wrap items-center gap-1.5 mb-5 text-xs font-mono">
-                  <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
-                    <strong class="font-semibold text-stone-500">FE:</strong> {project.data.structuredStack.frontend}
-                  </span>
-                  <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
-                    <strong class="font-semibold text-stone-500">BE:</strong> {project.data.structuredStack.backend}
-                  </span>
-                  <span class="px-2 py-0.5 rounded bg-[#eeece6] text-stone-800 border border-[#d6d3c9]">
-                    <strong class="font-semibold text-stone-500">DB:</strong> {project.data.structuredStack.db}
-                  </span>
-                </div>
-              )}
-
-              <!-- Architecture Highlights Checklist -->
-              {project.data.architectureFocus && (
-                <div class="mb-6 space-y-1.5">
-                  <div class="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold">Key Architectural Decisions:</div>
-                  <ul class="text-xs text-stone-700 space-y-1.5 pl-4 list-disc marker:text-[#d9481b]">
-                    {project.data.architectureFocus.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-
-            <!-- Card Bottom CTA -->
-            <div class="pt-5 border-t border-[#eeece6] flex items-center justify-between">
-              <a
-                href={`/projects/${project.id}`}
-                class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-900 group-hover:text-[#d9481b] uppercase tracking-wider font-mono transition-colors"
-              >
-                <span>Case Study</span>
-                <span class="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
-          </div>
+        {featuredProjects.map((project) => (
+          <ProjectCard {...project} />
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Pillar II: AI-Augmented Cross-Platform Engineering -->
+  <!-- Pillar II: Technical Explorations -->
   <section id="cross-platform" class="py-20 sm:py-28 border-b border-[#d6d3c9] bg-[#eeece6]/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <div class="max-w-2xl mb-16">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight mb-4">
-          AI-Augmented Cross-Platform Engineering
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
+          Technical Explorations
         </h2>
-        <p class="text-stone-600 text-sm leading-relaxed">
-          How senior architectural guidance enables autonomous AI agents to rapidly enter and ship across diverse environments: automotive game engine modding, native Windows .NET desktop, Chrome extensions, and compiler AST tooling.
-        </p>
       </div>
 
-      <!-- 5-Card Responsive Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Technical Explorations Projects Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {crossPlatformProjects.map((project) => (
-          <div class="rounded-xl border border-[#d6d3c9] bg-white p-6 flex flex-col justify-between hover:border-stone-500 transition-all group shadow-xs">
-            <div>
-              <h3 class="text-xl font-bold text-stone-900 group-hover:text-blue-700 transition-colors mb-2">
-                {project.data.title}
-              </h3>
-              <p class="text-stone-600 text-xs leading-relaxed mb-4">
-                {project.data.tagline}
-              </p>
-
-              <!-- Tech Stack Badges (Before Bulletpoints) -->
-              <div class="flex flex-wrap gap-1 mb-5">
-                {project.data.techStack.map((tech) => (
-                  <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-[#eeece6] text-stone-700 border border-[#d6d3c9]">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <!-- AI Synergies -->
-              {project.data.aiSynergies && project.data.aiSynergies.length > 0 ? (
-                <div class="mb-6 space-y-1.5">
-                  <div class="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold">AI Synergies:</div>
-                  <ul class="text-[11px] text-stone-700 space-y-1.5 pl-4 list-disc marker:text-[#d9481b] leading-snug">
-                    {project.data.aiSynergies.slice(0, 4).map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : project.data.aiMultiplierStory ? (
-                <div class="mb-6 text-[11px] text-stone-700 leading-relaxed">
-                  <div class="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold mb-1">AI Synergies:</div>
-                  <p>{project.data.aiMultiplierStory}</p>
-                </div>
-              ) : null}
-            </div>
-
-            <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
-              <a
-                href={`/projects/${project.id}`}
-                class="text-xs font-mono font-bold uppercase tracking-wider text-stone-800 group-hover:text-[#d9481b] transition-colors flex items-center gap-1"
-              >
-                <span>Case Study</span>
-                <span class="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
-          </div>
+          <ProjectCard {...project} />
         ))}
       </div>
     </div>
   </section>
+
+  <!-- Enlarged Image Modal Lightbox -->
+  <ImageLightbox />
 </Layout>
