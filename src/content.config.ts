@@ -24,8 +24,12 @@ const projects = defineCollection({
     }).optional(),
     aiMultiplierStory: z.string().optional(),
     aiSynergies: z.array(z.string()).optional(),
-    githubUrl: z.string().optional(),
-    demoUrl: z.string().optional(),
+    githubUrl: z.string().url().refine((val) => /^https?:\/\//i.test(val), {
+      message: "githubUrl must be an HTTP or HTTPS URL",
+    }).optional(),
+    demoUrl: z.string().url().refine((val) => /^https?:\/\//i.test(val), {
+      message: "demoUrl must be an HTTP or HTTPS URL",
+    }).optional(),
     coverImage: z.string().optional(),
     aestheticType: z.enum(['desktop', 'browser', 'extension', 'simulator', 'terminal']).default('browser'),
   }),

@@ -70,12 +70,16 @@
         const imgSrc = newTrigger.dataset.imgSrc || '';
         const imgAlt = newTrigger.dataset.imgAlt || title;
 
+        lightboxContent.textContent = '';
         if (imgSrc) {
-          lightboxContent.innerHTML = `
-            <div class="aspect-[16/10] w-full max-h-[85vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#d6d3c9] bg-stone-900 flex items-center justify-center shadow-2xl">
-              <img src="${imgSrc}" alt="${imgAlt}" class="w-full h-full object-contain" />
-            </div>
-          `;
+          const wrapper = document.createElement('div');
+          wrapper.className = 'aspect-[16/10] w-full max-h-[85vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#d6d3c9] bg-stone-900 flex items-center justify-center shadow-2xl';
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = imgAlt;
+          img.className = 'w-full h-full object-contain';
+          wrapper.appendChild(img);
+          lightboxContent.appendChild(wrapper);
         } else {
           lightboxContent.innerHTML = `
             <div class="aspect-[16/10] w-full max-h-[85vh] rounded-2xl sm:rounded-3xl border-2 sm:border-3 border-stone-900 bg-[#fcfbf9] flex flex-col items-center justify-center p-8 sm:p-14 text-center shadow-2xl">

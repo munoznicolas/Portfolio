@@ -31,10 +31,11 @@ const {
     <meta property="og:description" content={description} />
 
     <!-- Mermaid Client Rendering — Technical Ink on Warm Paper -->
-    <script is:inline type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    <script>
+      import mermaid from 'mermaid';
       mermaid.initialize({
         startOnLoad: false,
+        securityLevel: 'strict',
         theme: 'neutral',
         themeVariables: {
           darkMode: false,
