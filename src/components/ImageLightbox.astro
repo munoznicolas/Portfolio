@@ -48,9 +48,19 @@
     const closeBtn = document.getElementById('lightbox-close-btn');
     if (!dialog || !lightboxContent) return;
 
-    // Clicking anywhere on the dialog, backdrop, or enlarged picture dismisses it
+    // Clicking anywhere on the dialog or backdrop dismisses it
     dialog.addEventListener('click', () => {
       dialog.close();
+    });
+
+    // Cleanup video/audio playback immediately upon close
+    dialog.addEventListener('close', () => {
+      const activeVideo = lightboxContent.querySelector('video');
+      if (activeVideo) {
+        activeVideo.pause();
+        activeVideo.src = '';
+      }
+      lightboxContent.textContent = '';
     });
 
     closeBtn?.addEventListener('click', (e) => {
@@ -69,9 +79,26 @@
         const title = newTrigger.dataset.title || 'Project Preview';
         const imgSrc = newTrigger.dataset.imgSrc || '';
         const imgAlt = newTrigger.dataset.imgAlt || title;
+        const videoSrc = newTrigger.dataset.videoSrc || '';
 
         lightboxContent.textContent = '';
-        if (imgSrc) {
+        if (videoSrc) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'aspect-[16/10] w-full max-h-[85vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#d6d3c9] bg-stone-950 flex items-center justify-center shadow-2xl relative';
+          const video = document.createElement('video');
+          video.src = videoSrc;
+          if (imgSrc) video.poster = imgSrc;
+          video.controls = true;
+          video.autoplay = true;
+          video.loop = true;
+          video.muted = true;
+          video.playsInline = true;
+          video.className = 'w-full h-full object-contain';
+          // Prevent clicking video controls from closing the dialog
+          video.addEventListener('click', (ev) => ev.stopPropagation());
+          wrapper.appendChild(video);
+          lightboxContent.appendChild(wrapper);
+        } else if (imgSrc) {
           const wrapper = document.createElement('div');
           wrapper.className = 'aspect-[16/10] w-full max-h-[85vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#d6d3c9] bg-stone-900 flex items-center justify-center shadow-2xl';
           const img = document.createElement('img');

@@ -1,3 +1,5 @@
+import { DEPLOYMENTS } from './deployments.config';
+
 export interface ProjectCardConfig {
   id: string;
   title: string;
@@ -7,6 +9,13 @@ export interface ProjectCardConfig {
     src?: string;
     alt?: string;
   };
+  video?: {
+    src?: string;
+    poster?: string;
+  };
+  demoUrl?: string;
+  repositoryUrl?: string;
+  actionLabel?: string;
   description: string;
   techStack: string[];
   caseStudyUrl?: string;
@@ -22,7 +31,7 @@ export interface ProjectCardConfig {
  * - techStack: List of technologies displayed as pill badges
  * - caseStudyUrl: Link to case study page
  */
-export const projectsConfig: ProjectCardConfig[] = [
+const rawProjectsConfig: ProjectCardConfig[] = [
   // ==========================================
   // Pillar I: Featured Projects
   // ==========================================
@@ -32,8 +41,11 @@ export const projectsConfig: ProjectCardConfig[] = [
     pillar: 'architecture',
     order: 1,
     image: {
-      src: '', // Leave empty to display the standardized placeholder
+      src: '/images/omnilens-preview.png',
       alt: 'OmniLens browser-native vision and spatial price intelligence',
+    },
+    video: {
+      src: '/videos/omnilens.webm',
     },
     description: `Traditional retail price intelligence platforms rely on uploading continuous, high-bandwidth camera streams to centralized cloud servers for neural OCR and analysis. This architecture introduces prohibitive cloud compute expenses, latency bottlenecks, and significant user privacy risks.
 
@@ -49,8 +61,11 @@ Extracted price observations and bounding boxes are dispatched to a high-through
     pillar: 'architecture',
     order: 2,
     image: {
-      src: '',
+      src: '/images/cartas-preview.png',
       alt: 'Cartas Políticas real-time multiplayer card battler platform',
+    },
+    video: {
+      src: '/videos/cartas.webm',
     },
     description: `Real-time multiplayer card games require deterministic turn loops, strict synchronization guarantees, and tamper-proof rule enforcement. In peer-to-peer or loosely coordinated client setups, concurrent player actions, unstable connections, and turn timers frequently produce desynchronized state anomalies.
 
@@ -73,6 +88,9 @@ Card placements, damage calculations, and phase timers are evaluated entirely on
       src: '/images/ac-license-center-preview.png',
       alt: 'AC License Center Gran Turismo driving academy mod and test designer for Assetto Corsa',
     },
+    video: {
+      src: '/videos/ac-license-center.webm',
+    },
     description: `Modern racing simulators such as Assetto Corsa feature sophisticated physics engines but lack structured, progressive driver development curricula reminiscent of classic simulators like Gran Turismo. Building this functionality natively is notoriously difficult due to undocumented C++ bindings in modding APIs, binary track spline formats, and the requirement for sub-second trial restarts without engine reloads.
 
 AC License Center delivers a fully completed 5-tier driving school mod and event-driven runtime atop Custom Shaders Patch (CSP) Lua. The framework reverse-engineers binary .ai track splines to dynamically compute rolling-start gates, vector HUD ribbons, and real-time disqualification boundaries across 50+ challenges.
@@ -87,8 +105,11 @@ State resets execute in-memory in under 800ms without triggering 3D asset reload
     pillar: 'ai-multiplatform',
     order: 2,
     image: {
-      src: '',
+      src: '/images/bellview-preview.png',
       alt: 'BellView Intercom native Windows 11 desktop client',
+    },
+    video: {
+      src: '/videos/bellview.webm',
     },
     description: `Commercial IP door intercoms and video access systems overwhelmingly lock building occupants into proprietary mobile apps and push notification pipelines. When occupants are working at desktop workstations, mobile notifications are frequently delayed by mobile battery savers, missed entirely, or awkward to handle while multitasking.
 
@@ -104,8 +125,11 @@ Occupants can visually identify visitors, establish low-latency bidirectional in
     pillar: 'ai-multiplatform',
     order: 3,
     image: {
-      src: '',
+      src: '/images/curriculahub-preview.png',
       alt: 'CurriculaHub academic degree planning platform',
+    },
+    video: {
+      src: '/videos/curriculahub.webm',
     },
     description: `Navigating university degree curricula is notoriously confusing for students, as academic progression depends on complex prerequisite DAGs, strict corequisite rules, and semester-specific course offerings. Commercial schedule planners and university portals typically store sensitive student transcripts in proprietary clouds, offering rigid tabular interfaces that fail to visualize critical paths or prevent enrollment schedule overlaps.
 
@@ -121,8 +145,11 @@ A custom scheduling engine computes intersecting time vectors to identify timeta
     pillar: 'ai-multiplatform',
     order: 4,
     image: {
-      src: '',
+      src: '/images/smartpantry-preview.png',
       alt: 'SmartPantry Chrome extension grocery replenishment predictor',
+    },
+    video: {
+      src: '/videos/smartpantry.webm',
     },
     description: `Modern e-commerce grocery platforms are designed around impulse purchasing rather than household inventory sustainability. Consumers repeatedly encounter stockouts of essential staples because estimating replenishment cadences across dozens of pantry categories is mentally demanding, while third-party grocery trackers require tedious manual item logging that users quickly abandon.
 
@@ -138,8 +165,11 @@ The extension predicts depletion dates, flags items nearing expiration, and auto
     pillar: 'ai-multiplatform',
     order: 5,
     image: {
-      src: '',
+      src: '/images/ts2mermaid-preview.png',
       alt: 'ts2mermaid TypeScript AST compiler and Mermaid UML generator',
+    },
+    video: {
+      src: '/videos/ts2mermaid.webm',
     },
     description: `Software architecture diagrams are essential for engineering communication, yet they degrade rapidly as codebases evolve because manual diagramming tools like draw.io or Lucidchart require continuous manual maintenance. Existing code-to-diagram generators often require bulky external runtime installations or struggle to parse modern TypeScript constructs like recursive generics, multi-interface heritage, and declaration merges.
 
@@ -150,6 +180,16 @@ These semantic models are then translated into standardized Mermaid UML class an
     caseStudyUrl: '/projects/ts2mermaid',
   },
 ];
+
+export const projectsConfig: ProjectCardConfig[] = rawProjectsConfig.map((p) => {
+  const deployment = DEPLOYMENTS[p.id];
+  return {
+    ...p,
+    demoUrl: p.demoUrl || deployment?.demoUrl || deployment?.productionUrl,
+    repositoryUrl: p.repositoryUrl || deployment?.repositoryUrl,
+    actionLabel: p.actionLabel || deployment?.actionLabel,
+  };
+});
 
 export const featuredProjects = projectsConfig
   .filter((p) => p.pillar === 'architecture')

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { DEPLOYMENTS } from '../../config/deployments.config';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -12,8 +13,11 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const deployment = DEPLOYMENTS[project.id];
+const demoUrl = project.data.demoUrl || deployment?.demoUrl || deployment?.productionUrl;
+const githubUrl = project.data.githubUrl || deployment?.repositoryUrl;
 ---
 
-<CaseStudyLayout {...project.data}>
+<CaseStudyLayout {...project.data} demoUrl={demoUrl} githubUrl={githubUrl}>
   <Content />
 </CaseStudyLayout>
